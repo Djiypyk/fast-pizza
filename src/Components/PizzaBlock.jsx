@@ -1,12 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 
-export function Pizza ({name, price}) {
+export function PizzaBlock({name, price, img}) {
+    const [pizzaCount, setPizzaCount] = useState(0)
+    const pizzaCountIncrement = () => {
+        setPizzaCount(count => count + 1)
+    }
     return (
         <div className="pizza-block">
             <img
                 className="pizza-block__image"
-                src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-                alt="Pizza"
+                src={img}
+                alt="PizzaBlock"
             />
             <h4 className="pizza-block__title">{name}</h4>
             <div className="pizza-block__selector">
@@ -22,8 +26,8 @@ export function Pizza ({name, price}) {
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">{price}</div>
-                <div className="button button--outline button--add">
+                <div className="pizza-block__price">{price}&#8381;</div>
+                <button className="button button--outline button--add" onClick={pizzaCountIncrement}>
                     <svg
                         width="12"
                         height="12"
@@ -36,9 +40,9 @@ export function Pizza ({name, price}) {
                             fill="white"
                         />
                     </svg>
-                    <span>Добавить</span>
-                    <i>2</i>
-                </div>
+                    <span> Добавить </span>
+                    <i>{pizzaCount}</i>
+                </button>
             </div>
         </div>
     )

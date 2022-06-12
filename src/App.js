@@ -3,7 +3,8 @@ import './scss/app.scss';
 import {Header} from "./Components/Header";
 import {Categories} from "./Components/Categories";
 import {Sort} from "./Components/Sort";
-import {Pizza} from "./Components/Pizza";
+import {PizzaBlock} from "./Components/PizzaBlock.jsx";
+import pizzas from './common/pizza.json'
 
 
 function App() {
@@ -18,15 +19,9 @@ function App() {
                     </div>
                     <h2 className="content__title">Все пиццы</h2>
                     <div className="content__items">
-                        <Pizza name={'Чизбургер-пицца'} price={395}/>
-                        <Pizza name={'Чизбургер-пицца'} price={395}/>
-                        <Pizza name={'Чизбургер-пицца'} price={395}/>
-                        <Pizza name={'Чизбургер-пицца'} price={395}/>
-                        <Pizza name={'Чизбургер-пицца'} price={395}/>
-                        <Pizza name={'Чизбургер-пицца'} price={395}/>
-                        <Pizza name={'Чизбургер-пицца'} price={395}/>
-                        <Pizza name={'Чизбургер-пицца'} price={395}/>
-                        <Pizza name={'Чизбургер-пицца'} price={395}/>
+                        {pizzas.map((p) => {
+                            return <PizzaBlock img={p.imageUrl} name={p.title} price={p.price}/>
+                        })}
                     </div>
                 </div>
             </div>
