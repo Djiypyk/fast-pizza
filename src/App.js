@@ -19,14 +19,13 @@ function App() {
                     </div>
                     <h2 className="content__title">Все пиццы</h2>
                     <div className="content__items">
-                        {pizzas.map((p) => {
-                            return <PizzaBlock img={p.imageUrl} name={p.title} price={p.price}/>
-                        })}
+                        {pizzas.map((obj, i) => <PizzaBlock key={i} {...obj}/>)}
                     </div>
                 </div>
             </div>
         </div>
-    );
+    )
+        ;
 }
 
 export default App;
