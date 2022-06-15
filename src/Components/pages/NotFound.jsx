@@ -2,6 +2,10 @@ import React from 'react';
 import NotFoundBlock from "../NotFoundBlock";
 
 export const NotFound = () => {
-    return <NotFoundBlock/>
+    return (
+        <div className={'container'}>
+            <NotFoundBlock/>
+        </div>
+    )
 };
 

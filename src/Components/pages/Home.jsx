@@ -12,14 +12,13 @@ export const Home = () => {
         fetch('https://62a78e03bedc4ca6d7cad1f0.mockapi.io/items')
             .then((res) => res.json())
             .then(arr => {
-                setTimeout(() => {
-                    setItems(arr)
-                    setIsLoading(false)
-                }, 1000)
+                setItems(arr)
+                setIsLoading(false)
             })
+        window.scrollTo(0, 0)
     }, [])
     return (
-        <>
+        <div className={'container'}>
             <div className="content__top">
                 <Categories/>
                 <Sort/>
@@ -31,7 +30,7 @@ export const Home = () => {
                     : items.map(obj => <PizzaBlock
                         key={obj.id} {...obj}/>)}
             </div>
-        </>
+        </div>
     );
 };
 
