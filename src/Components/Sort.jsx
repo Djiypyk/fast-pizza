@@ -1,14 +1,22 @@
-import React, {useCallback, useState} from "react";
+import React, {useState} from "react";
 
-export function Sort() {
+export function Sort({sortValue, onClickSelectedType}) {
     const [isVisible, setIsVisible] = useState(false)
-    const [selected, setSelected] = useState(0)
     const changeVisible = () => setIsVisible(!isVisible)
-    const onClickSelected = useCallback((typeId) => {
-        setSelected(typeId)
+
+    const onChangeSelected = (obj) => {
+        onClickSelectedType(obj)
         setIsVisible(false)
-    }, [])
-    const sortType = ['Популярности', 'Цене', 'Алфавиту']
+    }
+
+    const list = [
+        {name: 'Популярности (max);', sortProperty: 'rating'},
+        {name: 'Популярности (min);', sortProperty: '-rating'},
+        {name: 'Цене (max)', sortProperty: 'price'},
+        {name: 'Цене (min);', sortProperty: '-price'},
+        {name: 'Алфавиту (z-a)', sortProperty: "title"},
+        {name: 'Алфавиту (a-z)', sortProperty: "-title"}
+    ]
     return (
         <div className="sort">
             <div className="sort__label">
@@ -25,13 +33,13 @@ export function Sort() {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={changeVisible}>{sortType[selected]}</span>
+                <span onClick={changeVisible}>{sortValue.name}</span>
             </div>
             {isVisible ? <div className="sort__popup">
                 <ul>
-                    {sortType.map((type, i) => <li onClick={() => onClickSelected(i)}
-                                                   className={selected === i ? 'active' : ''}
-                                                   key={i}>{type}</li>)}
+                    {list.map((obj, i) => <li onClick={() => onChangeSelected(obj)}
+                                              className={sortValue.sortProperty === obj.sortProperty ? 'active' : ''}
+                                              key={i}>{obj.name}</li>)}
                 </ul>
             </div> : null}
 
