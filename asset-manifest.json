@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/fast-pizza/static/css/main.2b61b2b2.css",
-    "main.js": "/fast-pizza/static/js/main.b3e89f19.js",
+    "main.js": "/fast-pizza/static/js/main.d3b2e1d9.js",
     "static/media/pizza-logo.svg": "/fast-pizza/static/media/pizza-logo.56ac87032d8f6fdf863326acd06c0d97.svg",
     "index.html": "/fast-pizza/index.html",
     "main.2b61b2b2.css.map": "/fast-pizza/static/css/main.2b61b2b2.css.map",
-    "main.b3e89f19.js.map": "/fast-pizza/static/js/main.b3e89f19.js.map"
+    "main.d3b2e1d9.js.map": "/fast-pizza/static/js/main.d3b2e1d9.js.map"
   },
   "entrypoints": [
     "static/css/main.2b61b2b2.css",
-    "static/js/main.b3e89f19.js"
+    "static/js/main.d3b2e1d9.js"
   ]
 }
