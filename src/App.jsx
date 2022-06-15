@@ -8,7 +8,6 @@ import {Cart} from "./Components/pages/Cart";
 
 function App() {
 
-
     return (
         <div className="wrapper">
             <Header/>
