@@ -10,6 +10,10 @@ export const Home = ({searchValue}) => {
     const [isLoading, setIsLoading] = useState(true)
     const [sortType, setSortType] = useState({name: 'Популярности', sortProperty: 'rating'})
     const [categoryId, setCategoryId] = useState(0)
+    const [currentPage, setCurrentPage] = useState(1)
+    const onChangeCurrentPage = (numberPage) => {
+        setCurrentPage(numberPage + 1)
+    }
     const onChangeCategory = (number) => {
         setCategoryId(number)
     }
@@ -23,7 +27,7 @@ export const Home = ({searchValue}) => {
         const sortCategory = categoryId > 0 ? `category=${categoryId}` : ''
         const sortByValue = searchValue ? `&search=${searchValue}` : ''
 
-        fetch(`https://62a78e03bedc4ca6d7cad1f0.mockapi.io/items?${
+        fetch(`https://62a78e03bedc4ca6d7cad1f0.mockapi.io/items?page=${currentPage}&limit=4&${
             sortCategory}${sortByValue}&sortBy=${sortBy}&order=${order}`)
             .then((res) => res.json())
             .then(arr => {
@@ -31,7 +35,7 @@ export const Home = ({searchValue}) => {
                 setIsLoading(false)
             })
         window.scrollTo(0, 0)
-    }, [categoryId, sortType.sortProperty, searchValue])
+    }, [categoryId, sortType.sortProperty, searchValue, currentPage])
 
     return (
         <div className={'container'}>
@@ -46,7 +50,7 @@ export const Home = ({searchValue}) => {
                     : items.map(obj => <PizzaBlock
                         key={obj.id} {...obj}/>)}
             </div>
-            <Paginator/>
+            <Paginator onChangeCurrentPage={onChangeCurrentPage}/>
         </div>
     );
 };
