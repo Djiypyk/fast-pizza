@@ -5,27 +5,33 @@ import PizzaSkeleton from "../../common/component/PizzaSkeleton";
 import {PizzaBlock} from "../PizzaBlock";
 import {Paginator} from "../../common/component/Pagination/Paginator";
 import {SearchContext} from "../../App";
+import {useDispatch, useSelector} from "react-redux";
+import {setCategoryId} from "../../store/redux/slices/filterSlice";
 
 export const Home = () => {
+    const dispatch = useDispatch()
+    const {categoryId, sort} = useSelector((state) => state.filter)
+    const sortType = sort.sortProperty
+
     const {searchValue} = useContext(SearchContext)
+
     const [items, setItems] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const [sortType, setSortType] = useState({name: 'Популярности', sortProperty: 'rating'})
-    const [categoryId, setCategoryId] = useState(0)
     const [currentPage, setCurrentPage] = useState(1)
+
+
     const onChangeCurrentPage = (numberPage) => {
         setCurrentPage(numberPage + 1)
     }
-    const onChangeCategory = (number) => {
-        setCategoryId(number)
-    }
-    const onClickSelectedType = (typeId) => {
-        setSortType(typeId)
+    const onChangeCategory = (id) => {
+        console.log(id)
+        dispatch(setCategoryId(id))
     }
 
+
     useEffect(() => {
-        const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc'
-        const sortBy = sortType.sortProperty.replace('-', '')
+        const order = sortType.includes('-') ? 'asc' : 'desc'
+        const sortBy = sortType.replace('-', '')
         const sortCategory = categoryId > 0 ? `category=${categoryId}` : ''
         const sortByValue = searchValue ? `&search=${searchValue}` : ''
 
@@ -37,13 +43,13 @@ export const Home = () => {
                 setIsLoading(false)
             })
         window.scrollTo(0, 0)
-    }, [categoryId, sortType.sortProperty, searchValue, currentPage])
+    }, [categoryId, sortType, searchValue, currentPage])
 
     return (
         <div className={'container'}>
             <div className="content__top">
-                <Categories value={categoryId} onClickCategory={onChangeCategory}/>
-                <Sort sortValue={sortType} onClickSelectedType={onClickSelectedType}/>
+                <Categories value={categoryId} onChangeCategory={onChangeCategory}/>
+                <Sort/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
