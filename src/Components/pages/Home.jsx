@@ -6,22 +6,21 @@ import {PizzaBlock} from "../PizzaBlock";
 import {Paginator} from "../../common/component/Pagination/Paginator";
 import {SearchContext} from "../../App";
 import {useDispatch, useSelector} from "react-redux";
-import {setCategoryId} from "../../store/redux/slices/filterSlice";
+import {setCategoryId, setCurrentPage} from "../../store/redux/slices/filterSlice";
+import axios from "axios";
 
 export const Home = () => {
     const dispatch = useDispatch()
-    const {categoryId, sort} = useSelector((state) => state.filter)
+    const {categoryId, sort, currentPage} = useSelector((state) => state.filter)
     const sortType = sort.sortProperty
 
     const {searchValue} = useContext(SearchContext)
 
     const [items, setItems] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const [currentPage, setCurrentPage] = useState(1)
 
-
-    const onChangeCurrentPage = (numberPage) => {
-        setCurrentPage(numberPage + 1)
+    const onChangeCurrentPage = numberPage => {
+        dispatch(setCurrentPage(numberPage))
     }
     const onChangeCategory = (id) => {
         console.log(id)
@@ -35,13 +34,13 @@ export const Home = () => {
         const sortCategory = categoryId > 0 ? `category=${categoryId}` : ''
         const sortByValue = searchValue ? `&search=${searchValue}` : ''
 
-        fetch(`https://62a78e03bedc4ca6d7cad1f0.mockapi.io/items?page=${currentPage}&limit=4&${
+        axios.get(`https://62a78e03bedc4ca6d7cad1f0.mockapi.io/items?page=${currentPage}&limit=4&${
             sortCategory}${sortByValue}&sortBy=${sortBy}&order=${order}`)
-            .then((res) => res.json())
-            .then(arr => {
-                setItems(arr)
-                setIsLoading(false)
-            })
+            .then(res => {
+                    setItems(res.data)
+                    setIsLoading(false)
+                }
+            )
         window.scrollTo(0, 0)
     }, [categoryId, sortType, searchValue, currentPage])
 
@@ -58,7 +57,7 @@ export const Home = () => {
                     : items.map(obj => <PizzaBlock
                         key={obj.id} {...obj}/>)}
             </div>
-            <Paginator onChangeCurrentPage={onChangeCurrentPage}/>
+            <Paginator currentPage={currentPage} onChangeCurrentPage={onChangeCurrentPage}/>
         </div>
     );
 };
