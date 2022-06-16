@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styles from './search.module.scss'
+import {SearchContext} from "../../App";
 
-export const Search = ({searchValue, setSearchValue}) => {
+export const Search = () => {
 
+    const {searchValue, setSearchValue} = useContext(SearchContext)
     const changeInput = (event) => {
         if (event.target.value) setSearchValue(event.target.value)
     }

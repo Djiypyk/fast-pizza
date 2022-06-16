@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Categories} from "../Categories";
 import {Sort} from "../Sort";
 import PizzaSkeleton from "../../common/component/PizzaSkeleton";
 import {PizzaBlock} from "../PizzaBlock";
 import {Paginator} from "../../common/component/Pagination/Paginator";
+import {SearchContext} from "../../App";
 
-export const Home = ({searchValue}) => {
+export const Home = () => {
+    const {searchValue} = useContext(SearchContext)
     const [items, setItems] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [sortType, setSortType] = useState({name: 'Популярности', sortProperty: 'rating'})
