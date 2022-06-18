@@ -2,7 +2,16 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setSort} from "../store/redux/slices/filterSlice";
 
-export function Sort() {
+export const list = [
+    {name: 'Популярности (max);', sortProperty: 'rating'},
+    {name: 'Популярности (min);', sortProperty: '-rating'},
+    {name: 'Цене (max)', sortProperty: 'price'},
+    {name: 'Цене (min);', sortProperty: '-price'},
+    {name: 'Алфавиту (z-a)', sortProperty: "title"},
+    {name: 'Алфавиту (a-z)', sortProperty: "-title"}
+]
+
+export const Sort = React.memo(() => {
     const dispatch = useDispatch()
     const sort = useSelector((state) => state.filter.sort)
     const [isVisible, setIsVisible] = useState(false)
@@ -13,14 +22,7 @@ export function Sort() {
         setIsVisible(false)
     }
 
-    const list = [
-        {name: 'Популярности (max);', sortProperty: 'rating'},
-        {name: 'Популярности (min);', sortProperty: '-rating'},
-        {name: 'Цене (max)', sortProperty: 'price'},
-        {name: 'Цене (min);', sortProperty: '-price'},
-        {name: 'Алфавиту (z-a)', sortProperty: "title"},
-        {name: 'Алфавиту (a-z)', sortProperty: "-title"}
-    ]
+
     return (
         <div className="sort">
             <div className="sort__label">
@@ -49,4 +51,4 @@ export function Sort() {
 
         </div>
     )
-}
+})
