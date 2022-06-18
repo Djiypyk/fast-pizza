@@ -4,7 +4,7 @@ import {Header} from "./Components/Header";
 import {Home} from "./Components/pages/Home";
 import {NotFound} from "./Components/pages/NotFound";
 import {Route, Routes} from "react-router-dom";
-import {Cart} from "./Components/pages/Cart";
+import {Cart} from "./Components/pages/Cart/Cart";
 
 export const PATH = {
     home: 'fast-pizza',
