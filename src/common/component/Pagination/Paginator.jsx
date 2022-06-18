@@ -10,7 +10,7 @@ export const Paginator = ({onChangeCurrentPage, currentPage}) => {
                 breakLabel="..."
                 nextLabel=">"
                 previousLabel="<"
-                onPageChange={e => onChangeCurrentPage(e.selected)}
+                onPageChange={e => onChangeCurrentPage(e.selected + 1)}
                 pageRangeDisplayed={4}
                 pageCount={3}
                 renderOnZeroPageCount={null}

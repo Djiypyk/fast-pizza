@@ -1,13 +1,12 @@
-import React, {useContext, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Categories} from "../Categories";
 import {list, Sort} from "../Sort";
 import PizzaSkeleton from "../../common/component/PizzaSkeleton";
 import {PizzaBlock} from "../PizzaBlock";
 import {Paginator} from "../../common/component/Pagination/Paginator";
-import {SearchContext} from "../../App";
 import {useDispatch, useSelector} from "react-redux";
-import {setCategoryId, setCurrentPage, setFilters} from "../../store/redux/slices/filterSlice";
-import {fetchPizzas} from "../../store/redux/slices/pizzaSlice";
+import {selectFilter, setCategoryId, setCurrentPage, setFilters} from "../../store/redux/slices/filterSlice";
+import {fetchPizzas, selectPizza} from "../../store/redux/slices/pizzaSlice";
 import qs from "qs";
 import {useNavigate} from "react-router-dom";
 
@@ -17,11 +16,9 @@ export const Home = () => {
     const isSearch = useRef(false)
     const isMounted = useRef(false)
 
-    const {categoryId, sort, currentPage} = useSelector((state) => state.filter)
-    const {items, status} = useSelector((state) => state.pizza)
+    const {categoryId, sort, currentPage, searchValue} = useSelector(selectFilter)
+    const {items, status} = useSelector(selectPizza)
     const sortType = sort.sortProperty
-
-    const {searchValue} = useContext(SearchContext)
 
     const onChangeCurrentPage = numberPage => {
         dispatch(setCurrentPage(numberPage))
@@ -62,24 +59,6 @@ export const Home = () => {
         }
         isSearch.current = false
     }, [categoryId, sortType, searchValue, currentPage])
-
-
-    // useEffect(() => {
-    //     const order = sortType.includes('-') ? 'asc' : 'desc'
-    //     const sortBy = sortType.replace('-', '')
-    //     const sortCategory = categoryId > 0 ? `category=${categoryId}` : ''
-    //     const sortByValue = searchValue ? `&search=${searchValue}` : ''
-    //
-    //     axios.get(`https://62a78e03bedc4ca6d7cad1f0.mockapi.io/items?page=${currentPage}&limit=4&${
-    //         sortCategory}${sortByValue}&sortBy=${sortBy}&order=${order}`)
-    //         .then((res) => {
-    //                 setIsLoading(false)
-    //                 dispatch(setItems(res.data))
-    //             }
-    //         )
-    //     window.scrollTo(0, 0)
-    // }, [categoryId, sortType, searchValue, currentPage])
-
 
     return (
         <div className={'container'}>
