@@ -1,12 +1,11 @@
 import React from 'react'
 import './scss/app.scss';
-import {Header} from "./Components/Header";
 import {Home} from "./Components/pages/Home";
 import {NotFound} from "./Components/pages/NotFound";
 import {Route, Routes} from "react-router-dom";
 import {Cart} from "./Components/pages/Cart/Cart";
-import {FullPizzas} from "./Components/pages/FullPizzas";
 import {MainLayout} from "./layout/MainLayout";
+import {FullPizzas} from "./Components/pages/FullPizzas.tsx";
 
 export const PATH = {
     home: '/fast-pizza',
@@ -24,6 +23,7 @@ function App() {
                 <Route path={PATH.pizza} element={<FullPizzas/>}/>
             </Route>
         </Routes>
+
     )
         ;
 }

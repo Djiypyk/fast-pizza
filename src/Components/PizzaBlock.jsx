@@ -43,11 +43,11 @@ export const PizzaBlock = ({id, title, price, imageUrl, sizes, types}) => {
                 <h4 className="pizza-block__title">{title}</h4>
                 <div className="pizza-block__selector">
                     <ul>
-                        {types.map(typeId => <li key={typeId} onClick={() => onClickActiveType(typeId)}
+                        {types && types.map(typeId => <li key={typeId} onClick={() => onClickActiveType(typeId)}
                                                  className={activeType === typeId ? 'active' : ''}>{typeNames[typeId]}</li>)}
                     </ul>
                     <ul>
-                        {sizes.map((size, i) => <li key={i} onClick={() => onClickActiveSize(i)}
+                        {sizes && sizes.map((size, i) => <li key={i} onClick={() => onClickActiveSize(i)}
                                                     className={activeSize === i ? 'active' : ''}>{size} см.</li>)}
                     </ul>
                 </div>
