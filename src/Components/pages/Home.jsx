@@ -50,7 +50,7 @@ export const Home = () => {
             dispatch(setFilters({params, sort}))
             isSearch.current = true
         }
-    }, [dispatch()])
+    }, [dispatch])
 
     useEffect(() => {
         window.scrollTo(0, 0)
