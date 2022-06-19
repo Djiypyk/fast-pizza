@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectFilter, setCategoryId, setCurrentPage, setFilters} from "../../store/redux/slices/filterSlice";
 import {fetchPizzas, selectPizza} from "../../store/redux/slices/pizzaSlice";
 import qs from "qs";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 export const Home = () => {
     const navigate = useNavigate()
@@ -50,7 +50,7 @@ export const Home = () => {
             dispatch(setFilters({params, sort}))
             isSearch.current = true
         }
-    }, [])
+    }, [dispatch()])
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -70,8 +70,14 @@ export const Home = () => {
             <div className="content__items">
                 {status === 'loading'
                     ? [...new Array(6)].map((_, index) => <PizzaSkeleton key={index}/>)
-                    : items.map(obj => <PizzaBlock
-                        key={obj.id} {...obj}/>)}
+                    : items.map(obj => {
+                        return (
+                            <Link key={obj.id} to={`/pizza/${obj.id}`}>
+                                <PizzaBlock
+                                    {...obj}/>
+                            </Link>
+                        )
+                    })}
             </div>
             <Paginator currentPage={currentPage} onChangeCurrentPage={onChangeCurrentPage}/>
         </div>
