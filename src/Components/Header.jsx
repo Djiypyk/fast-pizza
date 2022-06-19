@@ -25,8 +25,6 @@ export function Header() {
                 <Search/>
                 <div className="header__cart">
                     {location.pathname !== PATH.cart && (
-
-
                         <Link to={PATH.cart} className="button button--cart">
                             <span>{totalPrice} ₽</span>
                             <div className="button__delimiter"/>

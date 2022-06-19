@@ -3,7 +3,7 @@ import emptyCart from '../../../../common/assets/img/empty-cart.png'
 import {Link} from "react-router-dom";
 
 export const EmptyCart = () => {
-    return (<>
+    return (
         <div className="cart cart--empty">
             <h2>Корзина пустая 😕</h2>
             <p>
@@ -13,10 +13,9 @@ export const EmptyCart = () => {
             <img src={emptyCart} alt="Empty cart"/>
             <Link to='/' className="button button--black">
                 <span>Вернуться назад</span>
-                </Link>
-                </div>
-                </>
-                );
-            };
+            </Link>
+        </div>
+    );
+};
 
-            export default EmptyCart;
+export default EmptyCart;

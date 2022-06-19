@@ -20,6 +20,7 @@ export const FullPizzas = () => {
                 fetchPizza()
             }, [params.id, navigate]
         )
+
         if (!pizza) {
             return (<div className={'container'}><h2>Загрузка</h2></div>)
         }
