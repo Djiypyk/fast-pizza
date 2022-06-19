@@ -1,6 +1,11 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {RefObject, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {selectSort, setSort} from "../store/redux/slices/filterSlice";
+
+type SortItemT = {
+    name: string
+    sortProperty: string
+}
 
 export const list = [
     {name: 'Популярности (max);', sortProperty: 'rating'},
@@ -9,23 +14,24 @@ export const list = [
     {name: 'Цене (min);', sortProperty: '-price'},
     {name: 'Алфавиту (z-a)', sortProperty: "title"},
     {name: 'Алфавиту (a-z)', sortProperty: "-title"}
-]
+] as SortItemT[]
 
 export const Sort = React.memo(() => {
+
     const dispatch = useDispatch()
     const sort = useSelector(selectSort)
     const [isVisible, setIsVisible] = useState(false)
 
-    const sortRef = useRef()
+    const sortRef = useRef<HTMLDivElement>(null)
 
     const changeVisible = () => setIsVisible(!isVisible)
 
-    const onChangeSelected = (obj) => {
+    const onChangeSelected = (obj: SortItemT) => {
         dispatch(setSort(obj))
         setIsVisible(false)
     }
     useEffect(() => {
-        const handleClickOutside = (event) => {
+        const handleClickOutside = (event: any) => {
             if (!event.path.includes(sortRef.current)) {
                 setIsVisible(false)
             }

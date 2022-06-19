@@ -1,16 +1,18 @@
-import React, {useEffect, useRef} from 'react';
-import {Categories} from "../Categories";
-import {list, Sort} from "../Sort";
-import PizzaSkeleton from "../../common/component/PizzaSkeleton";
-import {PizzaBlock} from "../PizzaBlock";
-import {Paginator} from "../../common/component/Pagination/Paginator";
+import React, {FC, useEffect, useRef} from 'react';
+
 import {useDispatch, useSelector} from "react-redux";
-import {selectFilter, setCategoryId, setCurrentPage, setFilters} from "../../store/redux/slices/filterSlice";
-import {fetchPizzas, selectPizza} from "../../store/redux/slices/pizzaSlice";
 import qs from "qs";
 import {Link, useNavigate} from "react-router-dom";
 
-export const Home = () => {
+import {selectFilter, setCategoryId, setCurrentPage, setFilters} from "../../store/redux/slices/filterSlice";
+import {fetchPizzas, selectPizza} from "../../store/redux/slices/pizzaSlice";
+import {list, Sort} from "../Sort";
+import {Categories} from "../Categories";
+import PizzaSkeleton from "../../common/component/PizzaSkeleton";
+import {PizzaBlock} from "../PizzaBlock";
+import {Paginator} from "../../common/component/Pagination/Paginator";
+
+export const Home: FC = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const isSearch = useRef(false)
@@ -20,10 +22,10 @@ export const Home = () => {
     const {items, status} = useSelector(selectPizza)
     const sortType = sort.sortProperty
 
-    const onChangeCurrentPage = numberPage => {
+    const onChangeCurrentPage = (numberPage: number) => {
         dispatch(setCurrentPage(numberPage))
     }
-    const onChangeCategory = (id) => {
+    const onChangeCategory = (id:number) => {
         dispatch(setCategoryId(id))
     }
 
@@ -32,6 +34,7 @@ export const Home = () => {
         const sortBy = sortType.replace('-', '')
         const sortCategory = categoryId > 0 ? `category=${categoryId}` : ''
         const sortByValue = searchValue ? `&search=${searchValue}` : ''
+        // @ts-ignore
         dispatch(fetchPizzas({order, sortBy, sortCategory, sortByValue, currentPage}))
     }
 
@@ -70,7 +73,7 @@ export const Home = () => {
             <div className="content__items">
                 {status === 'loading'
                     ? [...new Array(6)].map((_, index) => <PizzaSkeleton key={index}/>)
-                    : items.map(obj => {
+                    : items.map((obj: any) => {
                         return (
                             <Link key={obj.id} to={`/pizza/${obj.id}`}>
                                 <PizzaBlock

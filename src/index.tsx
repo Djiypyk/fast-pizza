@@ -5,7 +5,7 @@ import './index.css';
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {store} from "./store/redux/store";
-import App from "./App.tsx";
+import App from "./App";
 
 const rootElem = document.getElementById('root')
 if (rootElem) {

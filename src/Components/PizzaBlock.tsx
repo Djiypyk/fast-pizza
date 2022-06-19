@@ -1,23 +1,38 @@
 import React, {useCallback, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {FC} from "react";
+
 import {addItem, selectCartItemById} from "../store/redux/slices/cartSlice";
 
-const typeNames = ['тонкое', 'традиционное']
 
-export const PizzaBlock = ({id, title, price, imageUrl, sizes, types}) => {
+const typeNames = ['тонкое', 'традиционное'] as string[]
+
+type PropsPizzaBlockT = {
+    id: string
+    title: string
+    price: number
+    imageUrl: string
+    sizes: number[]
+    types: number[]
+    rating: number
+}
+
+export const PizzaBlock: FC<PropsPizzaBlockT> = (
+    {id, title, price, imageUrl, sizes, types, rating}
+) => {
 
     const dispatch = useDispatch()
     const cartItem = useSelector(selectCartItemById(id))
 
-    const [activeType, setActiveType] = useState(0)
-    const [activeSize, setActiveSize] = useState(0)
+    const [activeType, setActiveType] = useState<number>(0)
+    const [activeSize, setActiveSize] = useState<number>(0)
 
     const addedCount = cartItem ? cartItem.count : 0
 
-    const onClickActiveType = useCallback((typeId) => {
+    const onClickActiveType = useCallback((typeId: number) => {
         setActiveType(typeId)
     }, [])
-    const onClickActiveSize = useCallback((typeId) => {
+    const onClickActiveSize = useCallback((typeId: number) => {
         setActiveSize(typeId)
     }, [])
 
@@ -44,11 +59,11 @@ export const PizzaBlock = ({id, title, price, imageUrl, sizes, types}) => {
                 <div className="pizza-block__selector">
                     <ul>
                         {types && types.map(typeId => <li key={typeId} onClick={() => onClickActiveType(typeId)}
-                                                 className={activeType === typeId ? 'active' : ''}>{typeNames[typeId]}</li>)}
+                                                          className={activeType === typeId ? 'active' : ''}>{typeNames[typeId]}</li>)}
                     </ul>
                     <ul>
                         {sizes && sizes.map((size, i) => <li key={i} onClick={() => onClickActiveSize(i)}
-                                                    className={activeSize === i ? 'active' : ''}>{size} см.</li>)}
+                                                             className={activeSize === i ? 'active' : ''}>{size} см.</li>)}
                     </ul>
                 </div>
                 <div className="pizza-block__bottom">
@@ -72,6 +87,5 @@ export const PizzaBlock = ({id, title, price, imageUrl, sizes, types}) => {
                 </div>
             </div>
         </div>
-
     )
 }

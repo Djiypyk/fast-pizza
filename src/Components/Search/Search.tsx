@@ -1,30 +1,30 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {ChangeEvent, useCallback, useRef, useState} from 'react';
 import styles from './search.module.scss'
-import debounce from "lodash.debounce";
 import {useDispatch} from "react-redux";
 import {setSearchValue} from "../../store/redux/slices/filterSlice";
+import debounce from 'lodash/debounce';
 
 export const Search = () => {
     const dispatch = useDispatch()
     const [value, setValue] = useState('')
-    const inputRef = useRef()
+    const inputRef = useRef <HTMLInputElement>(null)
 
-    const updateSearchValue = useCallback(
-        debounce((str) => {
+        const updateSearchValue = useCallback(
+        debounce((str: string) => {
             dispatch(setSearchValue(str))
 
         }, 1000), [])
 
-    const onClickClear = () => {
-        setValue('')
-        dispatch(setSearchValue(''))
-        inputRef.current.focus()
-    }
-    const onChangeInput = e => {
-        setValue(e.target.value)
-        updateSearchValue(e.target.value)
-    }
-    return (
+        const onClickClear = () => {
+            setValue('')
+            dispatch(setSearchValue(''))
+            inputRef.current?.focus()
+        }
+        const onChangeInput =( e: ChangeEvent<HTMLInputElement>) => {
+            setValue(e.target.value)
+            updateSearchValue(e.target.value)
+        }
+        return (
         <div className={styles.root}>
             <svg className={styles.icon} enableBackground="new 0 0 32 32" id="Editable-line" version="1.1"
                  viewBox="0 0 32 32"
@@ -46,5 +46,5 @@ export const Search = () => {
                     d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/>
             </svg> : ''}
         </div>
-    );
-};
+        );
+        };

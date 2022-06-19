@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {FC} from 'react';
 import emptyCart from '../../../../common/assets/img/empty-cart.png'
 import {Link} from "react-router-dom";
 
-export const EmptyCart = () => {
+export const EmptyCart: FC = () => {
     return (
         <div className="cart cart--empty">
             <h2>Корзина пустая 😕</h2>
