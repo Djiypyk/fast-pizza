@@ -7,7 +7,7 @@ import {addItem, selectCartItemById} from "../store/redux/slices/cartSlice";
 
 const typeNames = ['тонкое', 'традиционное'] as string[]
 
-type PropsPizzaBlockT = {
+ type PropsPizzaBlockT = {
     id: string
     title: string
     price: number
