@@ -22,10 +22,10 @@ export const Home: FC = () => {
     const {items, status} = useSelector(selectPizza)
     const sortType = sort.sortProperty
 
-    const onChangeCurrentPage = (numberPage: number) => {
+    const onChangeCurrentPage = (numberPage: number): void => {
         dispatch(setCurrentPage(numberPage))
     }
-    const onChangeCategory = (id:number) => {
+    const onChangeCategory = (id:number):void => {
         dispatch(setCategoryId(id))
     }
 

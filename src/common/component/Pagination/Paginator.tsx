@@ -7,20 +7,17 @@ type PropsPaginatorT = {
     currentPage: number
 }
 
-export const Paginator: FC<PropsPaginatorT> = ({onChangeCurrentPage, currentPage}) => {
-    return (
-        <div>
-            <ReactPaginate
-                className={styles.root}
-                breakLabel="..."
-                nextLabel=">"
-                previousLabel="<"
-                onPageChange={e => onChangeCurrentPage(e.selected + 1)}
-                pageRangeDisplayed={4}
-                pageCount={3}
-                forcePage={currentPage - 1}
-            />
-        </div>
-    );
-};
-
+export const Paginator: FC<PropsPaginatorT> = ({onChangeCurrentPage, currentPage}) => (
+    <div>
+        <ReactPaginate
+            className={styles.root}
+            breakLabel="..."
+            nextLabel=">"
+            previousLabel="<"
+            onPageChange={e => onChangeCurrentPage(e.selected + 1)}
+            pageRangeDisplayed={4}
+            pageCount={3}
+            forcePage={currentPage - 1}
+        />
+    </div>
+)
