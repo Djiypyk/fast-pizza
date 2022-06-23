@@ -1,25 +1,26 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {selectSort, setSort} from "../store/redux/slices/filterSlice";
+import {selectSort, setSort, SortPropertyE, SortT} from "../store/redux/slices/filterSlice";
 
-type SortItemT = {
-    name: string
-    sortProperty: string
-}
+
 type PopupClick = MouseEvent & {
     path: Node[]
 }
+export type Sort = {
+    name: string
+    sortProperty: SortPropertyE
+}
 
-export const list = [
-    {name: 'Популярности (max);', sortProperty: 'rating'},
-    {name: 'Популярности (min);', sortProperty: '-rating'},
-    {name: 'Цене (max)', sortProperty: 'price'},
-    {name: 'Цене (min);', sortProperty: '-price'},
-    {name: 'Алфавиту (z-a)', sortProperty: "title"},
-    {name: 'Алфавиту (a-z)', sortProperty: "-title"}
-] as SortItemT[]
+export const list: Sort[] = [
+    {name: 'Популярности (max);', sortProperty: SortPropertyE.RATING_PLUS},
+    {name: 'Популярности (min);', sortProperty: SortPropertyE.RATING_PLUS},
+    {name: 'Цене (max)', sortProperty: SortPropertyE.PRICE_PLUS},
+    {name: 'Цене (min);', sortProperty: SortPropertyE.PRICE_MINUS},
+    {name: 'Алфавиту (z-a)', sortProperty: SortPropertyE.TITLE_PLUS},
+    {name: 'Алфавиту (a-z)', sortProperty: SortPropertyE.TITLE_MINUS}
+]
 
-export const Sort = React.memo(() => {
+export const SortPopup = React.memo(() => {
 
     const dispatch = useDispatch()
     const sort = useSelector(selectSort)
@@ -29,7 +30,7 @@ export const Sort = React.memo(() => {
 
     const changeVisible = (): void => setIsVisible(!isVisible)
 
-    const onChangeSelected = (obj: SortItemT): void => {
+    const onChangeSelected = (obj: SortT): void => {
         dispatch(setSort(obj))
         setIsVisible(false)
     }

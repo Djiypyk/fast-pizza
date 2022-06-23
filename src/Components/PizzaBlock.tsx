@@ -2,12 +2,13 @@ import React, {useCallback, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {FC} from "react";
 
-import {addItem, selectCartItemById} from "../store/redux/slices/cartSlice";
+import {addItem, CartItemT, selectCartItemById} from "../store/redux/slices/cartSlice";
+import {Link} from "react-router-dom";
 
 
 const typeNames = ['тонкое', 'традиционное'] as string[]
 
- type PropsPizzaBlockT = {
+type PropsPizzaBlockT = {
     id: string
     title: string
     price: number
@@ -37,25 +38,28 @@ export const PizzaBlock: FC<PropsPizzaBlockT> = (
     }, [])
 
     const onClickAdd = () => {
-        const item = {
+        const item: CartItemT = {
             id,
             title,
             price,
             imageUrl,
             type: typeNames[activeType],
-            size: sizes[activeSize]
+            size: sizes[activeSize],
+            count: 0,
         }
         dispatch(addItem(item))
     }
     return (
         <div className={"pizza-block-wrapper"}>
             <div className="pizza-block">
-                <img
-                    className="pizza-block__image"
-                    src={imageUrl}
-                    alt="PizzaBlock"
-                />
-                <h4 className="pizza-block__title">{title}</h4>
+                <Link to={`/pizza/${id}`}>
+                    <img
+                        className="pizza-block__image"
+                        src={imageUrl}
+                        alt="PizzaBlock"
+                    />
+                    <h4 className="pizza-block__title">{title}</h4>
+                </Link>
                 <div className="pizza-block__selector">
                     <ul>
                         {types && types.map(typeId => <li key={typeId} onClick={() => onClickActiveType(typeId)}
