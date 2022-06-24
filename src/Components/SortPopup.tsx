@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {selectSort, setSort, SortPropertyE, SortT} from "../store/redux/slices/filterSlice";
+import {useDispatch} from "react-redux";
+import {SortPropertyE, SortT} from "../store/redux/filter/types";
+import {setSort} from "../store/redux/filter/slice";
 
 
 type PopupClick = MouseEvent & {
