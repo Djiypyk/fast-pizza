@@ -10,6 +10,9 @@ export type Sort = {
     name: string
     sortProperty: SortPropertyE
 }
+type SortPopupP = {
+    sort: SortT
+}
 
 export const list: Sort[] = [
     {name: 'Популярности (max);', sortProperty: SortPropertyE.RATING_PLUS},
@@ -20,10 +23,9 @@ export const list: Sort[] = [
     {name: 'Алфавиту (a-z)', sortProperty: SortPropertyE.TITLE_MINUS}
 ]
 
-export const SortPopup = React.memo(() => {
+export const SortPopup: React.FC<SortPopupP> = React.memo(({sort}) => {
 
     const dispatch = useDispatch()
-    const sort = useSelector(selectSort)
     const [isVisible, setIsVisible] = useState<boolean>(false)
 
     const sortRef = useRef<HTMLDivElement>(null)

@@ -1,12 +1,10 @@
-import React, {FC, useEffect, useRef} from 'react';
+import React, {FC, useCallback, useEffect} from 'react';
 
 import {useSelector} from "react-redux";
-import qs from "qs";
-import {Link, useNavigate} from "react-router-dom";
 
-import {selectFilter, setCategoryId, setCurrentPage, setFilters} from "../../store/redux/slices/filterSlice";
-import {fetchPizzas, SearchPizzaParams, selectPizza} from "../../store/redux/slices/pizzaSlice";
-import {list, SortPopup} from "../SortPopup";
+import {selectFilter, setCategoryId, setCurrentPage} from "../../store/redux/slices/filterSlice";
+import {fetchPizzas, selectPizza} from "../../store/redux/slices/pizzaSlice";
+import {SortPopup} from "../SortPopup";
 import {Categories} from "../Categories";
 import PizzaSkeleton from "../../common/component/PizzaSkeleton";
 import {PizzaBlock} from "../PizzaBlock";
@@ -14,10 +12,10 @@ import {Paginator} from "../../common/component/Pagination/Paginator";
 import {useAppDispatch} from "../../store/redux/store";
 
 export const Home: FC = () => {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const isSearch = useRef(false)
-    const isMounted = useRef(false)
+    // const isSearch = useRef(false)
+    // const isMounted = useRef(false)
 
     const {categoryId, sort, currentPage, searchValue} = useSelector(selectFilter)
     const {items, status} = useSelector(selectPizza)
@@ -26,9 +24,10 @@ export const Home: FC = () => {
     const onChangeCurrentPage = (numberPage: number): void => {
         dispatch(setCurrentPage(numberPage))
     }
-    const onChangeCategory = (id: number): void => {
-        dispatch(setCategoryId(id))
-    }
+    const onChangeCategory = useCallback((id: number): void => {
+            dispatch(setCategoryId(id))
+        }
+        , [dispatch])
 
     const getPizzas = async () => {
         const order = sortType.includes('-') ? 'asc' : 'desc'
@@ -70,7 +69,7 @@ export const Home: FC = () => {
     // }, [categoryId, sortType, searchValue, currentPage])
 
     useEffect(() => {
-            getPizzas()
+        getPizzas()
 
     }, [categoryId, sortType, searchValue, currentPage])
 
@@ -78,7 +77,7 @@ export const Home: FC = () => {
         <div className={'container'}>
             <div className="content__top">
                 <Categories value={categoryId} onChangeCategory={onChangeCategory}/>
-                <SortPopup/>
+                <SortPopup sort={sort}/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
@@ -86,8 +85,8 @@ export const Home: FC = () => {
                     ? [...new Array(6)].map((_, index) => <PizzaSkeleton key={index}/>)
                     : items.map((obj: any) => {
                         return (
-                                <PizzaBlock key={obj.id}
-                                    {...obj}/>
+                            <PizzaBlock key={obj.id}
+                                        {...obj}/>
                         )
                     })}
             </div>
