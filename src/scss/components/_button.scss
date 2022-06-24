@@ -42,6 +42,12 @@
     min-width: 32px;
     padding: 0;
     border-width: 2px;
+    @media (max-width: 866px) {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+
+    }
   }
 
   &--black {

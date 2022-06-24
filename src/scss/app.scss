@@ -140,7 +140,11 @@ body {
       margin-left: 7px;
       color: #b6b6b6;
       font-size: 18px;
+      @media (max-width: 490px) {
+        display: none
+      }
     }
+
 
     span,
     svg,
@@ -284,6 +288,27 @@ body {
         }
       }
     }
+
+    @media (max-width: 866px) {
+      &-img {
+        margin-right: 25px;
+      }
+      &-count {
+        b {
+          font-size: 18px;
+        }
+      }
+      &-price {
+        b {
+          font-size: 20px;
+        }
+      }
+    }
+    @media (max-width: 586px) {
+      &-img {
+        margin-right: 35px;
+      }
+    }
   }
 
   &__bottom {
@@ -295,6 +320,9 @@ body {
 
       span {
         font-size: 22px;
+        @media (max-width: 490px) {
+          font-size: 18px;
+        }
 
         &:last-of-type {
           b {
@@ -314,6 +342,9 @@ body {
         align-items: center;
         justify-content: center;
         width: 210px;
+        @media (max-width: 490px) {
+          width: 160px;
+        }
 
         border-color: darken($color: $gray-line, $amount: 10);
 
@@ -347,6 +378,9 @@ body {
         font-weight: 600;
         width: 210px;
         padding: 16px;
+        @media (max-width: 490px) {
+          width: 160px;
+        }
       }
     }
   }
@@ -388,19 +422,32 @@ body {
     }
   }
 
+  p {
+    font-size: 18px;
+    line-height: 145.4%;
+    letter-spacing: 0;
+  }
+
+  img {
+    width: 200px;
+  }
+
   @media (max-width: 490px) {
-    width: 260px;
+    width: 95%;
     h2 {
       font-size: 32px;
       margin: 20px 0;
     }
-    p {
-      font-size: 18px;
-      line-height: 145.4%;
-      letter-spacing: 0;
-    }
-    img {
-      width: 200px;
+    &__item-info {
+      h3 {
+        font-size: 14px;
+        margin: 0 6px;
+      }
+
+      p {
+        font-size: 14px;
+        margin: 0 10px;
+      }
     }
   }
 }
