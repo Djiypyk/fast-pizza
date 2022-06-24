@@ -8,8 +8,7 @@ import {clearItems} from "../../../store/redux/cart/slice";
 import {PATH} from "../../../App";
 
 
-
-export const Cart: FC = () => {
+const Cart: FC = () => {
     const dispatch = useDispatch()
     const {items, totalPrice} = useSelector(selectCart)
     const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
@@ -81,7 +80,7 @@ export const Cart: FC = () => {
                 </div>
             </div>
         </div>
-
     );
 };
 
+export default Cart
