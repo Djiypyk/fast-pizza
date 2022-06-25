@@ -17,6 +17,10 @@ const Cart: FC = () => {
             dispatch(clearItems())
         }
     }
+    const onPayPizzas = () => {
+        alert("Благодарим вас за доверие. Ожидайте Ваш заказ в течении часа.")
+        dispatch(clearItems())
+    }
     if (!totalPrice) {
         return <EmptyCart/>
     }
@@ -74,7 +78,7 @@ const Cart: FC = () => {
                             <span>Вернуться назад</span>
                         </Link>
                         <div className="button pay-btn">
-                            <span>Оплатить сейчас</span>
+                            <span onClick={onPayPizzas}>Оплатить сейчас</span>
                         </div>
                     </div>
                 </div>

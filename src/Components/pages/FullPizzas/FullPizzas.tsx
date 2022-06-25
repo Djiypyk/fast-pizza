@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {FC} from "react";
-import {PATH} from "../../../../App";
+import {PATH} from "../../../App";
 import styles from './fullPizzas.module.scss'
 
 const FullPizzas: FC = () => {

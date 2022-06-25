@@ -8,7 +8,7 @@ import {NotFound} from "./Components/pages/NotFound";
 import {MainLayout} from "./layout/MainLayout";
 
 const Cart = React.lazy(() => import(/*webpackChunkName: 'Cart'*/ './Components/pages/Cart/Cart'));
-const FullPizzas = React.lazy(() => import(/*webpackChunkName: 'FullPizzas'*/ './Components/pages/Cart/FullPizzas/FullPizzas'));
+const FullPizzas = React.lazy(() => import(/*webpackChunkName: 'FullPizzas'*/ './Components/pages/FullPizzas/FullPizzas'));
 
 function App() {
     return (
