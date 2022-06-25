@@ -38,6 +38,17 @@ body {
     p {
       font-size: 20px;
     }
+
+    @media (max-width: 500px) {
+      width: 280px;
+      h2 {
+        font-size: 28px;
+      }
+      p {
+        font-size: 16px;
+      }
+
+    }
   }
 
   &__title {
