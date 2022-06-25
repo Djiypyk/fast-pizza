@@ -2,16 +2,16 @@ import React, {useEffect, useRef} from "react";
 import pizzaLogo from "../common/assets/img/pizza-logo.svg"
 import {Link, useLocation} from "react-router-dom";
 import {Search} from "../common/component/Search/Search";
-// @ts-ignore
-import {PATH} from "../App.tsx";
 import {useSelector} from "react-redux";
 import {selectCart} from "../store/redux/cart/selectors";
+import {PATH} from "../App";
 
 export const Header = () => {
     const {items, totalPrice} = useSelector(selectCart)
     const location = useLocation()
     const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
     const isMounted = useRef(false)
+
     useEffect(() => {
         if (isMounted.current) {
             const json = JSON.stringify(items)
@@ -26,12 +26,12 @@ export const Header = () => {
                     <div className="header__logo">
                         <img width="38" src={pizzaLogo} alt="Pizza logo"/>
                         <div>
-                            <h1>React Pizza</h1>
+                            <h1>Fast Pizza</h1>
                             <p>самая вкусная пицца во вселенной</p>
                         </div>
                     </div>
                 </Link>
-                {location.pathname !== PATH.cart && <Search/>}
+                {location.pathname === PATH.home && <Search/>}
                 <div className="header__cart">
                     {location.pathname !== PATH.cart && (
                         <Link to={PATH.cart} className="button button--cart">

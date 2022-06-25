@@ -46,7 +46,11 @@
       width: 28px;
       height: 28px;
       min-width: 28px;
-
+    }
+    @media (max-width: 484px) {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
     }
   }
 

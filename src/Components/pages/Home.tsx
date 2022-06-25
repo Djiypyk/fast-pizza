@@ -12,6 +12,7 @@ import {selectFilter} from "../../store/redux/filter/selectors";
 import {selectPizza} from "../../store/redux/pizza/selectors";
 import {setCategoryId, setCurrentPage} from "../../store/redux/filter/slice";
 import {fetchPizzas} from "../../store/redux/pizza/asyncActions";
+import {PizzaT} from "../../store/redux/pizza/types";
 
 export const Home: FC = () => {
     // const navigate = useNavigate()
@@ -82,16 +83,25 @@ export const Home: FC = () => {
                 <SortPopup sort={sort}/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
-            <div className="content__items">
+            {items.length < 1 ? (
+                <div className={'content__error-info'}>
+                    <h2>Произошла ошибка</h2>
+                    <p>К сожалению, не удалось получить пиццы. Попробуйте повторить попытку позже или проверьте параметр
+                        запроса.</p>
+                </div>
+            ) : (
+                <div className="content__items">
                 {status === 'loading'
                     ? [...new Array(6)].map((_, index) => <PizzaSkeleton key={index}/>)
-                    : items.map((obj: any) => {
+                    : items.map((obj: PizzaT) => {
                         return (
                             <PizzaBlock key={obj.id}
                                         {...obj}/>
                         )
                     })}
             </div>
+            )}
+
             <Paginator currentPage={currentPage} onChangeCurrentPage={onChangeCurrentPage}/>
         </div>
     );

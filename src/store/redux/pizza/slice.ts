@@ -15,10 +15,8 @@ export const pizzaSlice = createSlice({
         setItems: (state, action: PayloadAction<PizzaT[]>) => {
             state.items = action.payload
         },
-
     },
     extraReducers: (builder) => {
-
         builder.addCase(fetchPizzas.pending, (state, action) => {
             state.status = Status.LOADING
             state.items = []

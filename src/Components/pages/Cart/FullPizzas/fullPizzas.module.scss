@@ -1,0 +1,63 @@
+.fullPizzas__wrapper {
+  width: 580px;
+  margin: 0 auto;
+
+  img {
+    width: 360px;
+    display: flex;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 700px) {
+    width: 480px;
+  }
+  @media (max-width: 510px) {
+    width: 320px;
+    img {
+      width: 200px;
+    }
+  }
+  @media (max-width: 510px) {
+    width: 280px;
+    img {
+      width: 180px;
+    }
+  }
+
+  h2 {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin: 20px auto;
+  }
+
+  p {
+    font-style: italic;
+    line-height: 24px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &_bottom {
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    h4 {
+      color: #fe5f1e;
+      font-size: 22px;
+    }
+    @media (max-width: 560px) {
+      h4{
+        font-size: 20px;
+      }
+      button{
+        height: 38px;
+        padding: 5px;
+      }
+
+    }
+  }
+
+}
