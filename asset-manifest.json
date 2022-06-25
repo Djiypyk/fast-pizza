@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/fast-pizza/static/css/main.1371c824.css",
-    "main.js": "/fast-pizza/static/js/main.ceb84880.js",
+    "main.js": "/fast-pizza/static/js/main.76e2a4b9.js",
     "Cart.js": "/fast-pizza/static/js/Cart.6f77166e.chunk.js",
     "FullPizzas.js": "/fast-pizza/static/js/FullPizzas.863eac95.chunk.js",
     "static/media/empty-cart.png": "/fast-pizza/static/media/empty-cart.db905d1f4b063162f25b.png",
     "static/media/pizza-logo.svg": "/fast-pizza/static/media/pizza-logo.56ac87032d8f6fdf863326acd06c0d97.svg",
     "index.html": "/fast-pizza/index.html",
     "main.1371c824.css.map": "/fast-pizza/static/css/main.1371c824.css.map",
-    "main.ceb84880.js.map": "/fast-pizza/static/js/main.ceb84880.js.map",
+    "main.76e2a4b9.js.map": "/fast-pizza/static/js/main.76e2a4b9.js.map",
     "Cart.6f77166e.chunk.js.map": "/fast-pizza/static/js/Cart.6f77166e.chunk.js.map",
     "FullPizzas.863eac95.chunk.js.map": "/fast-pizza/static/js/FullPizzas.863eac95.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1371c824.css",
-    "static/js/main.ceb84880.js"
+    "static/js/main.76e2a4b9.js"
   ]
 }
